@@ -112,7 +112,7 @@ namespace PCT.Backened.Controllers
         }
 
         [HttpGet("products-by-category")]
-        public IActionResult GetProductByCategory(int CategoryId)
+        public IActionResult GetProductByCategory(Guid CategoryId)
         {
             try
             {

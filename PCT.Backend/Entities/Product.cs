@@ -7,8 +7,8 @@ namespace PCT.Backened.Entities
     {
         public string? Code { get; set; }
         public string? Name { get; set; }
-        public int? Category { get; set; }
-        public int? Unit { get; set; }
+        public Guid Category { get; set; }
+        public Guid Unit { get; set; }
         public string? Description { get; set; }
         public ProductStatus Status { get; set; }
     }

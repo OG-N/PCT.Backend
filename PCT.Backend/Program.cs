@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using PCT.Backend.Repository;
+using PCT.Backend.Services;
 using PCT.Backened;
 using PCT.Backened.Repository;
 using PCT.Backened.Services;
@@ -16,6 +18,10 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 builder.Services.AddScoped(typeof(Repository<>));
 builder.Services.AddScoped(typeof(ProductRepository));
 builder.Services.AddScoped(typeof(ProductService));
+builder.Services.AddScoped(typeof(ProductCategoryRepository));
+builder.Services.AddScoped(typeof(ProductCategoryService));
+builder.Services.AddScoped(typeof(ProductUnitRepository));
+builder.Services.AddScoped(typeof(ProductUnitService));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

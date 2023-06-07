@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PCT.Backend.Entities;
 using PCT.Backened.Entities;
 
 namespace PCT.Backened
@@ -19,5 +20,7 @@ namespace PCT.Backened
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<ProductUnit> ProductUnits { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace PCT.Backened.Services
             return _repository.GetAll().Where(x => x.Id == Id).FirstOrDefault();
         }
 
-        public IEnumerable<Product> GetProductByCategoryId(int categoryId)
+        public IEnumerable<Product> GetProductByCategoryId(Guid categoryId)
         {
             return _repository.GetAll().Where(x => x.Category == categoryId);
         }
@@ -67,7 +67,7 @@ namespace PCT.Backened.Services
         {
             try
             {
-                return _repository.GetAll();
+                return _repository.GetAll().Where(x => x.IsDeleted == false);
             }
             catch (Exception)
             {
