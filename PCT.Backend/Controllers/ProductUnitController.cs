@@ -66,5 +66,18 @@ namespace PCT.Backend.Controllers
                 throw;
             }
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            try
+            {
+                return Ok(_service.GetById(id));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

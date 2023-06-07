@@ -61,5 +61,17 @@ namespace PCT.Backend.Services
                 throw;
             }
         }
+
+        public IEnumerable<ProductUnit> GetById(Guid id)
+        {
+            try
+            {
+                return _repository.GetAll().Where(x => x.Id == id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

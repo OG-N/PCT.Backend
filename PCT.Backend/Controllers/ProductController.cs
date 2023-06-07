@@ -123,5 +123,18 @@ namespace PCT.Backened.Controllers
                 throw;
             }
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            try
+            {
+                return Ok(_productService.GetById(id));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
