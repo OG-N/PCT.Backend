@@ -1,4 +1,5 @@
-﻿using PCT.Backend.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using PCT.Backend.Entities;
 using PCT.Backend.Repository;
 
 namespace PCT.Backend.Services
@@ -62,11 +63,11 @@ namespace PCT.Backend.Services
             }
         }
 
-        public IEnumerable<ProductUnit> GetById(Guid id)
+        public ProductUnit GetById(Guid id)
         {
             try
             {
-                return _repository.GetAll().Where(x => x.Id == id);
+                return _repository.GetById(id);
             }
             catch (Exception)
             {
