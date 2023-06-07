@@ -6,6 +6,9 @@ using PCT.Backened;
 using PCT.Backened.Repository;
 using PCT.Backened.Services;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+string[] _allowedOrigins;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -32,6 +35,14 @@ builder.Services.AddSwaggerGen(c =>
     c.EnableAnnotations();
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "PCT API", Version = "v1" });
 });
+_allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
+    {
+        policy.WithOrigins(_allowedOrigins).AllowAnyHeader().AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
@@ -45,7 +56,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseCors(MyAllowSpecificOrigins);
 app.MapControllers();
 
 EnsureMigration.EnsureMigrationOfContext<DataContext>(app);
