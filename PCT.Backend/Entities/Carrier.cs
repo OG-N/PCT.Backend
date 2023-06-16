@@ -3,10 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PCT.Backend.Entities
 {
-    [Table("mst_product_unit")]
-    public class ProductUnit : Entity
+    [Table("mst_carrier")]
+    public class Carrier : Entity
     {
         public string? Name { get; set; }
+        public Guid Category { get; set; }
+        public Guid Unit { get; set; }
         public string? Description { get; set; }
+        public Status Status { get; set; }
     }
 }

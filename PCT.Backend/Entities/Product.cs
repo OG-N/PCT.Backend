@@ -10,10 +10,10 @@ namespace PCT.Backened.Entities
         public Guid Category { get; set; }
         public Guid Unit { get; set; }
         public string? Description { get; set; }
-        public ProductStatus Status { get; set; }
+        public Status Status { get; set; }
     }
 
-    public enum ProductStatus
+    public enum Status
     {
         Pending,
         Approved

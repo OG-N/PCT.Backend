@@ -3,19 +3,19 @@ using PCT.Backend.Repository;
 
 namespace PCT.Backend.Services
 {
-    public class ProductUnitService
+    public class CarrierService
     {
-        private readonly ProductUnitRepository _repository;
-        public ProductUnitService(ProductUnitRepository repository)
+        private readonly CarrierRepository _repository;
+        public CarrierService(CarrierRepository repository)
         {
             _repository = repository;
         }
 
-        public ProductUnit Save(ProductUnit productUnit)
+        public Carrier Save(Carrier carrier)
         {
             try
             {
-                return _repository.Create(productUnit);
+                return _repository.Create(carrier);
             }
             catch (Exception)
             {
@@ -23,11 +23,11 @@ namespace PCT.Backend.Services
             }
         }
 
-        public ProductUnit Update(ProductUnit productUnit)
+        public Carrier Update(Carrier carrier)
         {
             try
             {
-                return _repository.Update(productUnit);
+                return _repository.Update(carrier);
             }
             catch (Exception)
             {
@@ -35,7 +35,7 @@ namespace PCT.Backend.Services
             }
         }
 
-        public IEnumerable<ProductUnit> GetAll()
+        public IEnumerable<Carrier> GetAll()
         {
             try
             {
@@ -51,9 +51,9 @@ namespace PCT.Backend.Services
         {
             try
             {
-                ProductUnit productUnit = _repository.GetById(id);
-                productUnit.IsDeleted = true;
-                _repository.Update(productUnit);
+                Carrier carrier = _repository.GetById(id);
+                carrier.IsDeleted = true;
+                _repository.Update(carrier);
                 return "Deleted successfully";
             }
             catch (Exception)
@@ -62,7 +62,7 @@ namespace PCT.Backend.Services
             }
         }
 
-        public IEnumerable<ProductUnit> GetById(Guid id)
+        public IEnumerable<Carrier> GetById(Guid id)
         {
             try
             {

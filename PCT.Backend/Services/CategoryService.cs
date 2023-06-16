@@ -3,15 +3,15 @@ using PCT.Backend.Repository;
 
 namespace PCT.Backend.Services
 {
-    public class ProductCategoryService
+    public class CategoryService
     {
-        private readonly ProductCategoryRepository _repository;
-        public ProductCategoryService(ProductCategoryRepository repository)
+        private readonly CategoryRepository _repository;
+        public CategoryService(CategoryRepository repository)
         {
             _repository = repository;
         }
 
-        public ProductCategory Save(ProductCategory productCategory)
+        public Category Save(Category productCategory)
         {
             try
             {
@@ -23,7 +23,7 @@ namespace PCT.Backend.Services
             }
         }
 
-        public ProductCategory Update(ProductCategory productCategory)
+        public Category Update(Category productCategory)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace PCT.Backend.Services
             }
         }
 
-        public IEnumerable<ProductCategory> GetAll()
+        public IEnumerable<Category> GetAll()
         {
             try
             {
@@ -51,7 +51,7 @@ namespace PCT.Backend.Services
         {
             try
             {
-                ProductCategory productCategory = _repository.GetById(id);
+                Category productCategory = _repository.GetById(id);
                 productCategory.IsDeleted = true;
                 _repository.Update(productCategory);
                 return "Deleted successfully";
@@ -62,7 +62,7 @@ namespace PCT.Backend.Services
             }
         }
 
-        public IEnumerable<ProductCategory> GetById(Guid id)
+        public IEnumerable<Category> GetById(Guid id)
         {
             try
             {

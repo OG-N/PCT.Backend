@@ -6,21 +6,21 @@ namespace PCT.Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductCategoryController : ControllerBase
+    public class CarrierController : ControllerBase
     {
-        private readonly ProductCategoryService _service;
+        private readonly CarrierService _service;
 
-        public ProductCategoryController(ProductCategoryService service)
+        public CarrierController(CarrierService service)
         {
             _service = service;
         }
 
         [HttpPost("")]
-        public IActionResult AddNew([FromBody] ProductCategory category)
+        public IActionResult AddNew([FromBody] Carrier carrier)
         {
             try
             {
-                return Ok(_service.Save(category));
+                return Ok(_service.Save(carrier));
             }
             catch (Exception)
             {
@@ -29,11 +29,11 @@ namespace PCT.Backend.Controllers
         }
 
         [HttpPut("")]
-        public IActionResult Update([FromBody] ProductCategory category)
+        public IActionResult Update([FromBody] Carrier carrier)
         {
             try
             {
-                return Ok(_service.Update(category));
+                return Ok(_service.Update(carrier));
             }
             catch (Exception)
             {
@@ -42,11 +42,11 @@ namespace PCT.Backend.Controllers
         }
 
         [HttpDelete("")]
-        public IActionResult Delete([FromBody] Guid productGuid)
+        public IActionResult Delete([FromBody] Guid guid)
         {
             try
             {
-                return Ok(_service.Delete(productGuid));
+                return Ok(_service.Delete(guid));
             }
             catch (Exception)
             {

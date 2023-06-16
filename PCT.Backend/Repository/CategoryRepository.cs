@@ -4,9 +4,9 @@ using PCT.Backened.Repository;
 
 namespace PCT.Backend.Repository
 {
-    public class ProductUnitRepository : Repository<ProductUnit>
+    public class CategoryRepository : Repository<Category>
     {
-        public ProductUnitRepository(DataContext dataContext) : base(dataContext)
+        public CategoryRepository(DataContext dataContext) : base(dataContext)
         {
         }
     }
