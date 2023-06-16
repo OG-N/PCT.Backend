@@ -63,7 +63,7 @@ namespace PCT.Backend.Services
             }
         }
 
-        public ProductUnit GetById(Guid id)
+        public Unit GetById(Guid id)
         {
             try
             {

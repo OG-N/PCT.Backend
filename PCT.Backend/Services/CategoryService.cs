@@ -62,7 +62,7 @@ namespace PCT.Backend.Services
             }
         }
 
-        public ProductCategory GetById(Guid id)
+        public Category GetById(Guid id)
         {
             try
             {

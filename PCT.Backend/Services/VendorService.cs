@@ -62,11 +62,11 @@ namespace PCT.Backend.Services
             }
         }
 
-        public IEnumerable<Vendor> GetById(Guid id)
+        public Vendor GetById(Guid id)
         {
             try
             {
-                return _repository.GetAll().Where(x => x.Id == id);
+                return _repository.GetById(id);
             }
             catch (Exception)
             {

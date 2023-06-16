@@ -90,11 +90,11 @@ namespace PCT.Backened.Services
             }
         }
 
-        public IEnumerable<Product> GetById(Guid id)
+        public Product GetById(Guid id)
         {
             try
             {
-                return _repository.GetAll().Where(x => x.Id == id);
+                return _repository.GetById(id);
             }
             catch (Exception)
             {
