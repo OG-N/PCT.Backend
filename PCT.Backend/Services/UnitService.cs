@@ -4,15 +4,15 @@ using PCT.Backend.Repository;
 
 namespace PCT.Backend.Services
 {
-    public class ProductUnitService
+    public class UnitService
     {
-        private readonly ProductUnitRepository _repository;
-        public ProductUnitService(ProductUnitRepository repository)
+        private readonly UnitRepository _repository;
+        public UnitService(UnitRepository repository)
         {
             _repository = repository;
         }
 
-        public ProductUnit Save(ProductUnit productUnit)
+        public Unit Save(Unit productUnit)
         {
             try
             {
@@ -24,7 +24,7 @@ namespace PCT.Backend.Services
             }
         }
 
-        public ProductUnit Update(ProductUnit productUnit)
+        public Unit Update(Unit productUnit)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace PCT.Backend.Services
             }
         }
 
-        public IEnumerable<ProductUnit> GetAll()
+        public IEnumerable<Unit> GetAll()
         {
             try
             {
@@ -52,7 +52,7 @@ namespace PCT.Backend.Services
         {
             try
             {
-                ProductUnit productUnit = _repository.GetById(id);
+                Unit productUnit = _repository.GetById(id);
                 productUnit.IsDeleted = true;
                 _repository.Update(productUnit);
                 return "Deleted successfully";
@@ -63,7 +63,7 @@ namespace PCT.Backend.Services
             }
         }
 
-        public ProductUnit GetById(Guid id)
+        public Unit GetById(Guid id)
         {
             try
             {

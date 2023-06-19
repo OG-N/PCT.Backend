@@ -6,17 +6,17 @@ namespace PCT.Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductUnitController : ControllerBase
+    public class CategoryController : ControllerBase
     {
-        private readonly ProductUnitService _service;
+        private readonly CategoryService _service;
 
-        public ProductUnitController(ProductUnitService service)
+        public CategoryController(CategoryService service)
         {
             _service = service;
         }
 
         [HttpPost("")]
-        public IActionResult AddNew([FromBody] ProductUnit category)
+        public IActionResult AddNew([FromBody] Category category)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace PCT.Backend.Controllers
         }
 
         [HttpPut("")]
-        public IActionResult Update([FromBody] ProductUnit category)
+        public IActionResult Update([FromBody] Category category)
         {
             try
             {
@@ -42,11 +42,11 @@ namespace PCT.Backend.Controllers
         }
 
         [HttpDelete("")]
-        public IActionResult Delete([FromBody] Guid productGuid)
+        public IActionResult Delete([FromBody] Guid guid)
         {
             try
             {
-                return Ok(_service.Delete(productGuid));
+                return Ok(_service.Delete(guid));
             }
             catch (Exception)
             {

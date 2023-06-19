@@ -3,19 +3,19 @@ using PCT.Backend.Repository;
 
 namespace PCT.Backend.Services
 {
-    public class ProductCategoryService
+    public class LocationService
     {
-        private readonly ProductCategoryRepository _repository;
-        public ProductCategoryService(ProductCategoryRepository repository)
+        private readonly LocationRepository _repository;
+        public LocationService(LocationRepository repository)
         {
             _repository = repository;
         }
 
-        public ProductCategory Save(ProductCategory productCategory)
+        public Location Save(Location location)
         {
             try
             {
-                return _repository.Create(productCategory);
+                return _repository.Create(location);
             }
             catch (Exception)
             {
@@ -23,11 +23,11 @@ namespace PCT.Backend.Services
             }
         }
 
-        public ProductCategory Update(ProductCategory productCategory)
+        public Location Update(Location location)
         {
             try
             {
-                return _repository.Update(productCategory);
+                return _repository.Update(location);
             }
             catch (Exception)
             {
@@ -35,7 +35,7 @@ namespace PCT.Backend.Services
             }
         }
 
-        public IEnumerable<ProductCategory> GetAll()
+        public IEnumerable<Location> GetAll()
         {
             try
             {
@@ -51,9 +51,9 @@ namespace PCT.Backend.Services
         {
             try
             {
-                ProductCategory productCategory = _repository.GetById(id);
-                productCategory.IsDeleted = true;
-                _repository.Update(productCategory);
+                Location location = _repository.GetById(id);
+                location.IsDeleted = true;
+                _repository.Update(location);
                 return "Deleted successfully";
             }
             catch (Exception)
@@ -62,7 +62,7 @@ namespace PCT.Backend.Services
             }
         }
 
-        public ProductCategory GetById(Guid id)
+        public Location GetById(Guid id)
         {
             try
             {

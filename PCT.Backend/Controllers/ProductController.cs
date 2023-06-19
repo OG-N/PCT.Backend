@@ -63,7 +63,7 @@ namespace PCT.Backened.Controllers
             try
             {
                 Product product = _productService.GetProductByUuid(productGuid);
-                product.Status = ProductStatus.Approved;
+                product.Status = Status.Approved;
                 return Ok(_productService.UpdateProduct(product));
             }
             catch (Exception)
