@@ -41,12 +41,12 @@ namespace PCT.Backend.Controllers
             }
         }
 
-        [HttpDelete("")]
-        public IActionResult Delete([FromBody] Guid productGuid)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
         {
             try
             {
-                return Ok(_service.Delete(productGuid));
+                return Ok(_service.Delete(id));
             }
             catch (Exception)
             {

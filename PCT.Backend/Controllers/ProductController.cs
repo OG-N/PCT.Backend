@@ -43,13 +43,12 @@ namespace PCT.Backened.Controllers
             }
         }
 
-        [HttpDelete("")]
-        public IActionResult DeleteProduct([FromBody] Guid productGuid)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
         {
             try
             {
-                _productService.GetProductByUuid(productGuid);
-                return Ok(_productService.Delete(productGuid));
+                return Ok(_productService.Delete(id));
             }
             catch (Exception)
             {
