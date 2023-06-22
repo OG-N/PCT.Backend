@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using PCT.Backend.Entities;
 using PCT.Backend.Repository;
 using PCT.Backend.Utils;
+using System.Configuration;
 
 namespace PCT.Backend.Services
 {
@@ -19,7 +20,8 @@ namespace PCT.Backend.Services
             try
             {
                 Carrier c = _repository.Create(carrier);
-                MiddlewareAdapter.PostCarrierToMiddleWare(c);
+                MiddlewareAdapter adapter = new MiddlewareAdapter();
+                adapter.PostCarrierToMiddleWare(c);
                 return c;
             }
             catch (Exception)

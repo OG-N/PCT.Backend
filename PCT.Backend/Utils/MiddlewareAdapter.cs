@@ -4,11 +4,19 @@ using PCT.Backend.Entities;
 
 namespace PCT.Backend.Utils
 {
-    public static class MiddlewareAdapter
+    public class MiddlewareAdapter
     {
-        public static ServiceBusClient client = new ServiceBusClient("Endpoint=sb://gscih-dev.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Q9JB5dtPzAeBSRcnlf+PxEj1MQbEjpaeL+ASbCzVV7g=");
+        public readonly ServiceBusClient client;
+        private readonly IConfiguration _configuration;
 
-        public static async void PostLocationToMiddleWare(Location location)
+        public MiddlewareAdapter()
+        {
+            _configuration = new ConfigurationBuilder().AddJsonFile("appsettings.Development.json").Build();
+            string sBConnection = _configuration.GetValue<string>("ServiceBusConnection");
+            client = new ServiceBusClient(sBConnection);
+        }
+
+        public async void PostLocationToMiddleWare(Location location)
         {
             try
             {
@@ -23,7 +31,7 @@ namespace PCT.Backend.Utils
             }
         }
 
-        public static async void PostCarrierToMiddleWare(Carrier carrier)
+        public async void PostCarrierToMiddleWare(Carrier carrier)
         {
             try
             {
@@ -38,7 +46,7 @@ namespace PCT.Backend.Utils
             }
         }
 
-        public static async void PostProductToMiddleWare(Product product)
+        public async void PostProductToMiddleWare(Product product)
         {
             try
             {
@@ -53,7 +61,7 @@ namespace PCT.Backend.Utils
             }
         }
 
-        public static async void PostVendorToMiddleWare(Vendor vendor)
+        public async void PostVendorToMiddleWare(Vendor vendor)
         {
             try
             {

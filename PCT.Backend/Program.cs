@@ -3,8 +3,6 @@ using Microsoft.OpenApi.Models;
 using PCT.Backend.Repository;
 using PCT.Backend.Services;
 using PCT.Backend;
-using PCT.Backend.Repository;
-using PCT.Backend.Services;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 string[] _allowedOrigins;

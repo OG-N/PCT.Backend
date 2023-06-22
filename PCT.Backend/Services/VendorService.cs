@@ -16,8 +16,9 @@ namespace PCT.Backend.Services
         {
             try
             {
-                Vendor v = _repository.Create(vendor); 
-                MiddlewareAdapter.PostVendorToMiddleWare(v);
+                Vendor v = _repository.Create(vendor);
+                MiddlewareAdapter adapter = new MiddlewareAdapter();
+                adapter.PostVendorToMiddleWare(v);
                 return v;
             }
             catch (Exception)

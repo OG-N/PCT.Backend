@@ -19,7 +19,8 @@ namespace PCT.Backend.Services
             try
             {
                 Location l = _repository.Create(location);
-                MiddlewareAdapter.PostLocationToMiddleWare(l);
+                MiddlewareAdapter adapter = new MiddlewareAdapter();
+                adapter.PostLocationToMiddleWare(l);
                 return l;
             }
             catch (Exception)

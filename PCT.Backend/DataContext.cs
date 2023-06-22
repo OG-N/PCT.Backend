@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PCT.Backend.Entities;
-using PCT.Backend.Entities;
 
 namespace PCT.Backend
 {
