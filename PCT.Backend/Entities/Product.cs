@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PCT.Backened.Entities
+namespace PCT.Backend.Entities
 {
     [Table("mst_product")]
     public class Product : Entity

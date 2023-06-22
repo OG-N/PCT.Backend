@@ -1,5 +1,6 @@
 ﻿using PCT.Backend.Entities;
 using PCT.Backend.Repository;
+using PCT.Backend.Utils;
 
 namespace PCT.Backend.Services
 {
@@ -15,7 +16,9 @@ namespace PCT.Backend.Services
         {
             try
             {
-                return _repository.Create(vendor);
+                Vendor v = _repository.Create(vendor); 
+                MiddlewareAdapter.PostVendorToMiddleWare(v);
+                return v;
             }
             catch (Exception)
             {

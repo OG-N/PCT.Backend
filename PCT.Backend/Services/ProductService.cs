@@ -1,7 +1,8 @@
-﻿using PCT.Backened.Entities;
-using PCT.Backened.Repository;
+﻿using PCT.Backend.Entities;
+using PCT.Backend.Repository;
+using PCT.Backend.Utils;
 
-namespace PCT.Backened.Services
+namespace PCT.Backend.Services
 {
     public class ProductService
     {
@@ -13,7 +14,7 @@ namespace PCT.Backened.Services
 
         public Product GetProductByUuid(Guid Id)
         {
-            return _repository.GetAll().Where(x => x.Id == Id).FirstOrDefault();
+            return _repository.GetById(Id);
         }
 
         public IEnumerable<Product> GetProductByCategoryId(Guid categoryId)
@@ -28,7 +29,9 @@ namespace PCT.Backened.Services
             {
                 foreach (var product in products)
                 {
-                    savedproducts.Add(_repository.Create(product));
+                    Product p = _repository.Create(product);
+                    savedproducts.Add(p);
+                    MiddlewareAdapter.PostProductToMiddleWare(p);
                 }
 
                 return savedproducts;
@@ -43,7 +46,9 @@ namespace PCT.Backened.Services
         {
             try
             {
-                return _repository.Create(product);
+                Product p = _repository.Create(product);
+                MiddlewareAdapter.PostProductToMiddleWare(p);
+                return p;
             }
             catch (Exception)
             {
@@ -55,7 +60,9 @@ namespace PCT.Backened.Services
         {
             try
             {
-                return _repository.Update(product);
+                Product p = _repository.Update(product);
+                MiddlewareAdapter.PostProductToMiddleWare(p);
+                return p;
             }
             catch (Exception)
             {

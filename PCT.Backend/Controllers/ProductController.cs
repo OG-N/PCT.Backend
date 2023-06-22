@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PCT.Backened.Entities;
-using PCT.Backened.Services;
+using PCT.Backend.Entities;
+using PCT.Backend.Services;
 
-namespace PCT.Backened.Controllers
+namespace PCT.Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

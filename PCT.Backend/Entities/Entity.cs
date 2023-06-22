@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PCT.Backened.Entities
+namespace PCT.Backend.Entities
 {
     public class Entity
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace PCT.Backened
+namespace PCT.Backend
 {
     public static class EnsureMigration
     {
