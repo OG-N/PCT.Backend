@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PCT.Backened.Entities;
-using PCT.Backened.Services;
+using PCT.Backend.Entities;
+using PCT.Backend.Services;
 
-namespace PCT.Backened.Controllers
+namespace PCT.Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -43,13 +43,12 @@ namespace PCT.Backened.Controllers
             }
         }
 
-        [HttpDelete("")]
-        public IActionResult DeleteProduct([FromBody] Guid productGuid)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
         {
             try
             {
-                _productService.GetProductByUuid(productGuid);
-                return Ok(_productService.Delete(productGuid));
+                return Ok(_productService.Delete(id));
             }
             catch (Exception)
             {
@@ -63,7 +62,7 @@ namespace PCT.Backened.Controllers
             try
             {
                 Product product = _productService.GetProductByUuid(productGuid);
-                product.Status = ProductStatus.Approved;
+                product.Status = Status.Approved;
                 return Ok(_productService.UpdateProduct(product));
             }
             catch (Exception)
@@ -112,11 +111,24 @@ namespace PCT.Backened.Controllers
         }
 
         [HttpGet("products-by-category")]
-        public IActionResult GetProductByCategory(int CategoryId)
+        public IActionResult GetProductByCategory(Guid CategoryId)
         {
             try
             {
                 return Ok(_productService.GetProductByCategoryId(CategoryId));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            try
+            {
+                return Ok(_productService.GetById(id));
             }
             catch (Exception)
             {

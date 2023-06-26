@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PCT.Backened.Entities;
+using PCT.Backend.Entities;
 using System.Linq.Expressions;
 
-namespace PCT.Backened.Repository
+namespace PCT.Backend.Repository
 {
     public class Repository<T> where T : Entity
     {
