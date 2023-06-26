@@ -20,8 +20,6 @@ namespace PCT.Backend.Services
             try
             {
                 Carrier c = _repository.Create(carrier);
-                MiddlewareAdapter adapter = new MiddlewareAdapter();
-                adapter.PostCarrierToMiddleWare(c);
                 return c;
             }
             catch (Exception)

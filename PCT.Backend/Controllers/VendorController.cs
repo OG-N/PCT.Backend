@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PCT.Backend.Entities;
 using PCT.Backend.Services;
+using PCT.Backend.Utils;
 
 namespace PCT.Backend.Controllers
 {
@@ -9,10 +10,14 @@ namespace PCT.Backend.Controllers
     public class VendorController: ControllerBase
     {
         private readonly VendorService _service;
+        private readonly IConfiguration _configuration;
+        private readonly MiddlewareAdapter _middlewareAdapter;
 
-        public VendorController(VendorService service)
+        public VendorController(VendorService service, IConfiguration configuration)
         {
             _service = service;
+            _configuration = configuration;
+            _middlewareAdapter = new MiddlewareAdapter(_configuration);
         }
 
         [HttpPost("")]
@@ -20,7 +25,9 @@ namespace PCT.Backend.Controllers
         {
             try
             {
-                return Ok(_service.Save(vendor));
+                Vendor v = _service.Save(vendor);
+                _middlewareAdapter.PostVendorToMiddleWare(v);
+                return Ok(v);
             }
             catch (Exception)
             {

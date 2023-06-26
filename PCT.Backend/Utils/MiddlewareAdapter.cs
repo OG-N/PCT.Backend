@@ -6,14 +6,15 @@ namespace PCT.Backend.Utils
 {
     public class MiddlewareAdapter
     {
-        public readonly ServiceBusClient client;
+        private readonly ServiceBusClient client;
         private readonly IConfiguration _configuration;
+        private readonly string _connectionString;
 
-        public MiddlewareAdapter()
+        public MiddlewareAdapter(IConfiguration configuration)
         {
-            _configuration = new ConfigurationBuilder().AddJsonFile("appsettings.Development.json").Build();
-            string sBConnection = _configuration.GetValue<string>("ServiceBusConnection");
-            client = new ServiceBusClient(sBConnection);
+            _configuration = configuration;
+            _connectionString = _configuration.GetConnectionString("ServiceBusConnection");
+            client = new ServiceBusClient(_connectionString);
         }
 
         public async void PostLocationToMiddleWare(Location location)
