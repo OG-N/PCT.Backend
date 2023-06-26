@@ -8,5 +8,14 @@ namespace PCT.Backend.Entities
     {
         public string? Name { get; set; }
         public string? Description { get; set; }
+        public Group Group { get; set; }
+    }
+
+    public enum Group
+    {
+        Product,
+        Carrier,
+        Location,
+        Vendor
     }
 }
