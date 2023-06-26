@@ -29,10 +29,7 @@ namespace PCT.Backend.Services
             {
                 foreach (var product in products)
                 {
-                    Product p = _repository.Create(product);
-                    savedproducts.Add(p);
-                    MiddlewareAdapter adapter = new MiddlewareAdapter();
-                    adapter.PostProductToMiddleWare(p);
+                    savedproducts.Add(_repository.Create(product));
                 }
 
                 return savedproducts;
@@ -47,10 +44,7 @@ namespace PCT.Backend.Services
         {
             try
             {
-                Product p = _repository.Create(product);
-                MiddlewareAdapter adapter = new MiddlewareAdapter();
-                adapter.PostProductToMiddleWare(p);
-                return p;
+                return _repository.Create(product);
             }
             catch (Exception)
             {
@@ -62,10 +56,7 @@ namespace PCT.Backend.Services
         {
             try
             {
-                Product p = _repository.Update(product);
-                MiddlewareAdapter adapter = new MiddlewareAdapter();
-                adapter.PostProductToMiddleWare(p);
-                return p;
+               return _repository.Update(product);
             }
             catch (Exception)
             {

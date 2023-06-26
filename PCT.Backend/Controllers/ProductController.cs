@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PCT.Backend.Entities;
 using PCT.Backend.Services;
+using PCT.Backend.Utils;
 
 namespace PCT.Backend.Controllers
 {
@@ -9,10 +10,14 @@ namespace PCT.Backend.Controllers
     public class ProductController : ControllerBase
     {
         private readonly ProductService _productService;
+        private readonly IConfiguration _configuration;
+        private readonly MiddlewareAdapter _middlewareAdapter;
 
-        public ProductController(ProductService productService)
+        public ProductController(ProductService productService, IConfiguration configuration)
         {
             _productService = productService;
+            _configuration = configuration;
+            _middlewareAdapter = new MiddlewareAdapter(_configuration);
         }
 
         [HttpPost("")]
@@ -20,8 +25,9 @@ namespace PCT.Backend.Controllers
         {
             try
             {
-                _productService.SaveProduct(product);
-                return Ok(product);
+                Product p = _productService.SaveProduct(product);
+                _middlewareAdapter.PostProductToMiddleWare(p);
+                return Ok(p);
             }
             catch (Exception)
             {

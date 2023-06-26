@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PCT.Backend.Entities;
 using PCT.Backend.Services;
+using PCT.Backend.Utils;
 
 namespace PCT.Backend.Controllers
 {
@@ -9,10 +10,14 @@ namespace PCT.Backend.Controllers
     public class CarrierController : ControllerBase
     {
         private readonly CarrierService _service;
+        private readonly IConfiguration _configuration;
+        private readonly MiddlewareAdapter _middlewareAdapter;
 
-        public CarrierController(CarrierService service)
+        public CarrierController(CarrierService service, IConfiguration configuration)
         {
             _service = service;
+            _configuration = configuration;
+            _middlewareAdapter = new MiddlewareAdapter(_configuration);
         }
 
         [HttpPost("")]
@@ -20,7 +25,9 @@ namespace PCT.Backend.Controllers
         {
             try
             {
-                return Ok(_service.Save(carrier));
+                Carrier c = _service.Save(carrier);
+                _middlewareAdapter.PostCarrierToMiddleWare(c);
+                return Ok(c);
             }
             catch (Exception)
             {
