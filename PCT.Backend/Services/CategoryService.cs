@@ -73,5 +73,17 @@ namespace PCT.Backend.Services
                 throw;
             }
         }
+
+        public IEnumerable<Category> GetByGroup(Group group)
+        {
+            try
+            {
+                return _repository.GetAll().Where(x => x.Group == group && x.IsDeleted == false);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

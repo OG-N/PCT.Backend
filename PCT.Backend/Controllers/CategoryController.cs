@@ -79,5 +79,18 @@ namespace PCT.Backend.Controllers
                 throw;
             }
         }
+
+        [HttpGet("categories-by-group/{groupId}")]
+        public IActionResult GetByGroup(int groupId)
+        {
+            try
+            {
+                return Ok(_service.GetByGroup((Group)groupId));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

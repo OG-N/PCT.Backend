@@ -1,5 +1,4 @@
-﻿using PCT.Backend.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PCT.Backend.Entities
 {
@@ -8,5 +7,6 @@ namespace PCT.Backend.Entities
     {
         public string? Name { get; set; }
         public string? Description { get; set; }
+        public Group Group { get; set; }
     }
 }
