@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using PCT.Backened;
+using PCT.Backend;
 
 #nullable disable
 
@@ -89,7 +89,7 @@ namespace PCT.Backend.Migrations
                     b.ToTable("mst_unit");
                 });
 
-            modelBuilder.Entity("PCT.Backened.Entities.Product", b =>
+            modelBuilder.Entity("PCT.Backend.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

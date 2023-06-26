@@ -1,5 +1,9 @@
-﻿using PCT.Backend.Entities;
+﻿using Azure.Messaging.ServiceBus;
+using Newtonsoft.Json;
+using PCT.Backend.Entities;
 using PCT.Backend.Repository;
+using PCT.Backend.Utils;
+using System.Configuration;
 
 namespace PCT.Backend.Services
 {
@@ -15,7 +19,10 @@ namespace PCT.Backend.Services
         {
             try
             {
-                return _repository.Create(carrier);
+                Carrier c = _repository.Create(carrier);
+                MiddlewareAdapter adapter = new MiddlewareAdapter();
+                adapter.PostCarrierToMiddleWare(c);
+                return c;
             }
             catch (Exception)
             {

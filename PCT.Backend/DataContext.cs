@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PCT.Backend.Entities;
-using PCT.Backened.Entities;
 
-namespace PCT.Backened
+namespace PCT.Backend
 {
     public class DataContext : DbContext
     {

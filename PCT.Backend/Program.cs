@@ -2,9 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using PCT.Backend.Repository;
 using PCT.Backend.Services;
-using PCT.Backened;
-using PCT.Backened.Repository;
-using PCT.Backened.Services;
+using PCT.Backend;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 string[] _allowedOrigins;
@@ -16,6 +14,7 @@ builder.Configuration
     .AddEnvironmentVariables();
 builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 
 // Add services to the container.
 builder.Services.AddScoped(typeof(Repository<>));
