@@ -62,12 +62,12 @@ namespace PCT.Backend.Controllers
             }
         }
 
-        [HttpPost("approve")]
-        public IActionResult ApproveProduct([FromBody] Guid productGuid)
+        [HttpGet("approve/{id}")]
+        public IActionResult ApproveProduct(Guid id)
         {
             try
             {
-                Product product = _productService.GetProductByUuid(productGuid);
+                Product product = _productService.GetProductByUuid(id);
                 product.Status = Status.Approved;
                 return Ok(_productService.UpdateProduct(product));
             }
