@@ -40,6 +40,15 @@ namespace PCT.Backend.Repository
             return entity;
         }
 
+        public List<T> ExecuteSQL<T>(FormattableString query) where T : class
+        {
+            var result = _dataContext.Database
+                                .SqlQuery<T>(query)
+                                .ToList();
+
+            return result;
+        }
+
         public T GetById(Guid id)
         {
             return DbSet.SingleOrDefault(x => x.Id == id);
