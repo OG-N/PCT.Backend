@@ -6,7 +6,7 @@ namespace PCT.Backened.Repository
 {
     public class Repository<T> where T : Entity
     {
-        private readonly DataContext _dataContext;
+        protected readonly DataContext _dataContext;
         private readonly DbSet<T> DbSet;
 
         public Repository(DataContext dataContext)

@@ -14,8 +14,32 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // Add services to the container.
 builder.Services.AddScoped(typeof(Repository<>));
+
 builder.Services.AddScoped(typeof(ProductRepository));
+builder.Services.AddScoped(typeof(OptionRouteRepository));
+builder.Services.AddScoped(typeof(RoleOptionRepository));
+builder.Services.AddScoped(typeof(RoleRepository));
+builder.Services.AddScoped(typeof(UserRepository));
+builder.Services.AddScoped(typeof(UserRoleRepository));
 builder.Services.AddScoped(typeof(ProductService));
+builder.Services.AddScoped(typeof(OptionRouteService));
+builder.Services.AddScoped(typeof(RoleOptionService));
+builder.Services.AddScoped(typeof(RoleService));
+builder.Services.AddScoped(typeof(UserRoleService));
+builder.Services.AddScoped(typeof(UserService));
+
+builder.Services.AddScoped(typeof(CMSContentImpactRepository));
+builder.Services.AddScoped(typeof(CMSContentLeadershipRepository));
+builder.Services.AddScoped(typeof(CMSContentPageItemRepository));
+builder.Services.AddScoped(typeof(CMSContentPageRepository));
+builder.Services.AddScoped(typeof(CMSContentPageSectionRepository));
+builder.Services.AddScoped(typeof(CMSContentRolesRepository));
+builder.Services.AddScoped(typeof(CMSContentImpactService));
+builder.Services.AddScoped(typeof(CMSContentLeadershipService));
+builder.Services.AddScoped(typeof(CMSContentPageItemService));
+builder.Services.AddScoped(typeof(CMSContentPageService));
+builder.Services.AddScoped(typeof(CMSContentPageSectionService));
+builder.Services.AddScoped(typeof(CMSContentRolesService));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -27,6 +51,20 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "PCT API", Version = "v1" });
 });
 
+//Added to enable access:
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+string[] _allowedOrigins;
+_allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
+    {
+        policy.WithOrigins(_allowedOrigins).AllowAnyHeader().AllowAnyMethod();
+    });
+});
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,7 +75,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthorization();
 
 app.MapControllers();
