@@ -48,7 +48,7 @@ namespace PCT.Backend.Controllers
                 report.AllRecords = _productService.GetAllCount();
                 report.Pending = _productService.GetPendingCount();
                 report.Approved = _productService.GetApprovedCount();
-                report.Rejected = 0;
+                report.Rejected = _productService.GetRjectedCount();
                 report.Products = _productService.GetAllCount();
                 report.Locations =_locationService.GetCount();
                 report.Stakeholders = 0;

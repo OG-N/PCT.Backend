@@ -138,5 +138,17 @@ namespace PCT.Backend.Services
                 throw;
             }
         }
+
+        public double GetRjectedCount()
+        {
+            try
+            {
+                return _repository.GetAll().Where(x => x.Status == Status.Rejected).Count();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
