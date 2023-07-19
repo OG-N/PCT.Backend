@@ -74,5 +74,17 @@ namespace PCT.Backend.Services
                 throw;
             }
         }
+
+        public double GetCount()
+        {
+            try
+            {
+                return _repository.GetAll().Count();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
