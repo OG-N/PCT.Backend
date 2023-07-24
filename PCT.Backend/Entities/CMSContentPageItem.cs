@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using PCT.Backend.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PCT.Backened.Entities
 {
