@@ -16,6 +16,7 @@ namespace PCT.Backend.Entities
     public enum Status
     {
         Pending,
-        Approved
+        Approved,
+        Rejected
     }
 }

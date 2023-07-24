@@ -9,12 +9,28 @@ namespace PCT.Backend.Controllers
     [ApiController]
     public class DashboardController : ControllerBase
     {
-        private readonly ProductService _service;
+        private readonly ProductService _productService;
+        private readonly CarrierService _carrierService;
+        private readonly CategoryService _categoryService;
+        private readonly LocationService _locationService;
+        private readonly UnitService _unitService;
+        private readonly VendorService _vendorService;
         private readonly IConfiguration _configuration;
 
-        public DashboardController(ProductService service, IConfiguration configuration)
+        public DashboardController(ProductService productService, 
+            CarrierService carrierService,
+            CategoryService categoryService,
+            LocationService locationService,
+            UnitService unitService,
+            VendorService vendorService,
+            IConfiguration configuration)
         {
-            _service = service;
+            _productService = productService;
+            _carrierService = carrierService;
+            _categoryService = categoryService;
+            _locationService = locationService;
+            _unitService = unitService;
+            _vendorService = vendorService;
             _configuration = configuration;
         }
 
@@ -23,20 +39,23 @@ namespace PCT.Backend.Controllers
         {
             try
             {
-                List<Product> allproducts = _service.GetProducts().ToList();
-
-                var summary = allproducts.GroupBy(x => x.CreateDate)
-                            .Select(x => new
-                            {
-                                products = x.Count(),
-                                Date = (DateTime)x.Key
-                            }).ToList();
+                var summary = from p in _productService.GetProducts()
+                              group p by p.CreateDate.GetValueOrDefault().Date into g
+                              orderby g.Key
+                              select new { CreateDate = g.Key, Count = g.Count() };
 
                 Report report = new Report();
-                report.AllRecords = allproducts.Count();
-                report.Pending = allproducts.Where(x => x.Status == Status.Pending).Count();
-                report.Approved = allproducts.Where(x => x.Status == Status.Approved).Count();
-                report.Rejected = 0;
+                report.AllRecords = _productService.GetAllCount();
+                report.Pending = _productService.GetPendingCount();
+                report.Approved = _productService.GetApprovedCount();
+                report.Rejected = _productService.GetRjectedCount();
+                report.Products = _productService.GetAllCount();
+                report.Locations =_locationService.GetCount();
+                report.Stakeholders = 0;
+                report.Transport = 0;
+                report.Carriers = _carrierService.GetCount();
+                report.UnitsOfMeasure = _unitService.GetCount();
+                report.Categories = _categoryService.GetCount();
                 report.ProductsChart = summary;
                 return Ok(report);
             }

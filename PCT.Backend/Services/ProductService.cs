@@ -102,5 +102,53 @@ namespace PCT.Backend.Services
                 throw;
             }
         }
+
+        public double GetAllCount()
+        {
+            try
+            {
+                return _repository.GetAll().Count();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public double GetPendingCount()
+        {
+            try
+            {
+                return _repository.GetAll().Where(x => x.Status == Status.Pending).Count();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public double GetApprovedCount()
+        {
+            try
+            {
+                return _repository.GetAll().Where(x => x.Status == Status.Approved).Count();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public double GetRjectedCount()
+        {
+            try
+            {
+                return _repository.GetAll().Where(x => x.Status == Status.Rejected).Count();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
