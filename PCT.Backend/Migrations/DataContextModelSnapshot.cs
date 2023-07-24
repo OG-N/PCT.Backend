@@ -99,6 +99,74 @@ namespace PCT.Backend.Migrations
                 });
 
             modelBuilder.Entity("PCT.Backend.Entities.Location", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid");
+
+
+
+                b.Property<Guid>("Category")
+                    .HasColumnType("uuid");
+
+
+
+                b.Property<string>("Country")
+                    .HasColumnType("text");
+
+
+
+                b.Property<DateTime?>("CreateDate")
+                    .HasColumnType("timestamp without time zone");
+
+
+
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("text");
+
+
+
+                b.Property<string>("Description")
+                    .HasColumnType("text");
+
+
+
+                b.Property<bool?>("IsDeleted")
+                    .HasColumnType("boolean");
+
+
+
+                b.Property<string>("Name")
+                    .HasColumnType("text");
+
+
+
+                b.Property<int>("Status")
+                    .HasColumnType("integer");
+
+
+
+                b.Property<Guid>("Unit")
+                    .HasColumnType("uuid");
+
+
+
+                b.Property<DateTime?>("UpdateDate")
+                    .HasColumnType("timestamp without time zone");
+
+
+
+                b.Property<string>("UpdatedBy")
+                    .HasColumnType("text");
+
+
+
+                b.HasKey("Id");
+
+
+
+                b.ToTable("mst_location");
+            });
             modelBuilder.Entity("PCT.Backened.Entities.CMSContentImpact", b =>
                 {
                     b.Property<Guid>("Id")
