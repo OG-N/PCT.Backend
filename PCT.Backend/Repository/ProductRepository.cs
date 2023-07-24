@@ -1,6 +1,6 @@
-﻿using PCT.Backened.Entities;
+﻿using PCT.Backend.Entities;
 
-namespace PCT.Backened.Repository
+namespace PCT.Backend.Repository
 {
     public class ProductRepository : Repository<Product>
     {

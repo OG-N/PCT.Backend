@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PCT.Backened.Entities;
+using PCT.Backend.Entities;
 using System.Linq.Expressions;
 
-namespace PCT.Backened.Repository
+namespace PCT.Backend.Repository
 {
     public class Repository<T> where T : Entity
     {
@@ -38,6 +38,15 @@ namespace PCT.Backened.Repository
             _dataContext.Entry(entity).State = EntityState.Modified;
             _dataContext.SaveChanges();
             return entity;
+        }
+
+        public List<T> ExecuteSQL<T>(FormattableString query) where T : class
+        {
+            var result = _dataContext.Database
+                                .SqlQuery<T>(query)
+                                .ToList();
+
+            return result;
         }
 
         public T GetById(Guid id)

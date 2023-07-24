@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "PCT.Backened": {
+    "PCT.Backend": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

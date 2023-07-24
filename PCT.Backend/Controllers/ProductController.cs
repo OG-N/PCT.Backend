@@ -1,18 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PCT.Backened.Entities;
-using PCT.Backened.Services;
+using PCT.Backend.Entities;
+using PCT.Backend.Services;
+using PCT.Backend.Utils;
 
-namespace PCT.Backened.Controllers
+namespace PCT.Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
     {
         private readonly ProductService _productService;
+        private readonly IConfiguration _configuration;
+        private readonly MiddlewareAdapter _middlewareAdapter;
 
-        public ProductController(ProductService productService)
+        public ProductController(ProductService productService, IConfiguration configuration)
         {
             _productService = productService;
+            _configuration = configuration;
+            _middlewareAdapter = new MiddlewareAdapter(_configuration);
         }
 
         [HttpPost("")]
@@ -20,8 +25,9 @@ namespace PCT.Backened.Controllers
         {
             try
             {
-                _productService.SaveProduct(product);
-                return Ok(product);
+                Product p = _productService.SaveProduct(product);
+                _middlewareAdapter.PostProductToMiddleWare(p);
+                return Ok(p);
             }
             catch (Exception)
             {
@@ -43,13 +49,12 @@ namespace PCT.Backened.Controllers
             }
         }
 
-        [HttpDelete("")]
-        public IActionResult DeleteProduct([FromBody] Guid productGuid)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
         {
             try
             {
-                _productService.GetProductByUuid(productGuid);
-                return Ok(_productService.Delete(productGuid));
+                return Ok(_productService.Delete(id));
             }
             catch (Exception)
             {
@@ -57,13 +62,13 @@ namespace PCT.Backened.Controllers
             }
         }
 
-        [HttpPost("approve")]
-        public IActionResult ApproveProduct([FromBody] Guid productGuid)
+        [HttpGet("approve/{id}")]
+        public IActionResult ApproveProduct(Guid id)
         {
             try
             {
-                Product product = _productService.GetProductByUuid(productGuid);
-                product.Status = ProductStatus.Approved;
+                Product product = _productService.GetProductByUuid(id);
+                product.Status = Status.Approved;
                 return Ok(_productService.UpdateProduct(product));
             }
             catch (Exception)
@@ -112,11 +117,24 @@ namespace PCT.Backened.Controllers
         }
 
         [HttpGet("products-by-category")]
-        public IActionResult GetProductByCategory(int CategoryId)
+        public IActionResult GetProductByCategory(Guid CategoryId)
         {
             try
             {
                 return Ok(_productService.GetProductByCategoryId(CategoryId));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            try
+            {
+                return Ok(_productService.GetById(id));
             }
             catch (Exception)
             {
