@@ -19,6 +19,7 @@ namespace PCT.Backened.Repository
         public IQueryable<OptionRoute> GetOptionRoutesByUserId(Guid id)
         {
             string customQuery = "  select tb1.\"Id\", tb1.\"Category\", tb1.\"Name\", tb1.\"Route\", tb1.\"CreateDate\", tb1.\"IsDeleted\"\r\n  " +
+                ", tb1.CreatedBy, tb1.UpdateDate, tb1.UpdatedBy " +
                 "from icl_options_routes tb1 inner join icl_role_options tb2 on tb1.\"Id\" =tb2.\"OptionId\"\r\n   " +
                 " inner join icl_user_roles tb4 on tb2.\"RoleId\"=tb4.\"RoleId\" inner join icl_users tb5 on tb4.\"UserId\"=tb5.\"Id\"\r\n  " +
                 "where tb1.\"IsDeleted\" is false and tb2.\"IsDeleted\" is false  and tb4.\"IsDeleted\" is false and tb5.\"IsDeleted\" is false \r\n    " +
@@ -26,7 +27,9 @@ namespace PCT.Backened.Repository
             var resultData = _dataContext.OptionRoutes.FromSqlRaw<OptionRoute>(customQuery).ToList();
             resultData.ForEach(item => item.Category = "Read");
 
-            customQuery = " select tb1.\"Id\", tb1.\"Category\", tb1.\"Name\", tb1.\"Route\", tb1.\"CreateDate\", tb1.\"IsDeleted\"\r\n  from icl_options_routes tb1 " +
+            customQuery = " select tb1.\"Id\", tb1.\"Category\", tb1.\"Name\", tb1.\"Route\", tb1.\"CreateDate\", tb1.\"IsDeleted\"\r\n " +
+                ", tb1.CreatedBy, tb1.UpdateDate, tb1.UpdatedBy " +
+                "from icl_options_routes tb1 " +
                 "inner join icl_role_options tb2 on tb1.\"Id\" =tb2.\"OptionId\"\r\n    inner join icl_user_roles tb4 on tb2.\"RoleId\"=tb4.\"RoleId\" " +
                 "inner join icl_users tb5 on tb4.\"UserId\"=tb5.\"Id\"\r\n  where tb1.\"IsDeleted\" is false and tb2.\"IsDeleted\" is false  and tb4.\"IsDeleted\" " +
                 "is false and tb5.\"IsDeleted\" is false \r\n    and tb2.\"WritePermission\" is true and tb4.\"Enabled\" is true and tb5.\"Id\" = '" + id + "'\r\n ";
@@ -35,6 +38,7 @@ namespace PCT.Backened.Repository
             resultData2.ForEach(item => item.Category = "Write");
 
             customQuery = " \r\n  select tb1.\"Id\", tb1.\"Category\", tb1.\"Name\", tb1.\"Route\", tb1.\"CreateDate\", tb1.\"IsDeleted\"\r\n  " +
+                ", tb1.CreatedBy, tb1.UpdateDate, tb1.UpdatedBy " +
                 "from icl_options_routes tb1 inner join icl_role_options tb2 on tb1.\"Id\" =tb2.\"OptionId\"\r\n    " +
                 "inner join icl_user_roles tb4 on tb2.\"RoleId\"=tb4.\"RoleId\" inner join icl_users tb5 on tb4.\"UserId\"=tb5.\"Id\"\r\n  " +
                 "where tb1.\"IsDeleted\" is false and tb2.\"IsDeleted\" is false  and tb4.\"IsDeleted\" is false and tb5.\"IsDeleted\" is false \r\n   " +
