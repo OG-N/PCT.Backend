@@ -16,7 +16,7 @@ namespace PCT.Backened.Repository
         {
             string customQuery = "SELECT ir.\"Id\",ir.\"Name\", ir.\"CreateDate\", ir.\"IsDeleted\", " +
                 "ccr.\"Id\" AS CMS_content_roles_id, COALESCE(ccr.\"Status\",false) AS Status\r\n" +
-                ", ir.CreatedBy, ir.UpdateDate, ir.UpdatedBy " +
+                ", ir.\"CreatedBy\", ir.\"UpdateDate\", ir.\"UpdatedBy\" " +
                 "FROM icl_roles ir " +
                 "LEFT OUTER JOIN (\r\n  SELECT * FROM cms_content_roles " +
                 "WHERE \"Id_content\"='"+ Id_content + "' AND \"Type\"="+ Type + "\r\n  ) " +
