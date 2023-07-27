@@ -3,6 +3,8 @@ using Microsoft.OpenApi.Models;
 using PCT.Backend.Repository;
 using PCT.Backend.Services;
 using PCT.Backend;
+using PCT.Backened.Repository;
+using PCT.Backened.Services;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 string[] _allowedOrigins;
@@ -18,7 +20,13 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // Add services to the container.
 builder.Services.AddScoped(typeof(Repository<>));
+
 builder.Services.AddScoped(typeof(ProductRepository));
+builder.Services.AddScoped(typeof(OptionRouteRepository));
+builder.Services.AddScoped(typeof(RoleOptionRepository));
+builder.Services.AddScoped(typeof(RoleRepository));
+builder.Services.AddScoped(typeof(UserRepository));
+builder.Services.AddScoped(typeof(UserRoleRepository));
 builder.Services.AddScoped(typeof(ProductService));
 builder.Services.AddScoped(typeof(CategoryRepository));
 builder.Services.AddScoped(typeof(CategoryService));
@@ -30,6 +38,24 @@ builder.Services.AddScoped(typeof(LocationRepository));
 builder.Services.AddScoped(typeof(LocationService));
 builder.Services.AddScoped(typeof(VendorRepository));
 builder.Services.AddScoped(typeof(VendorService));
+builder.Services.AddScoped(typeof(OptionRouteService));
+builder.Services.AddScoped(typeof(RoleOptionService));
+builder.Services.AddScoped(typeof(RoleService));
+builder.Services.AddScoped(typeof(UserRoleService));
+builder.Services.AddScoped(typeof(UserService));
+
+builder.Services.AddScoped(typeof(CMSContentImpactRepository));
+builder.Services.AddScoped(typeof(CMSContentLeadershipRepository));
+builder.Services.AddScoped(typeof(CMSContentPageItemRepository));
+builder.Services.AddScoped(typeof(CMSContentPageRepository));
+builder.Services.AddScoped(typeof(CMSContentPageSectionRepository));
+builder.Services.AddScoped(typeof(CMSContentRolesRepository));
+builder.Services.AddScoped(typeof(CMSContentImpactService));
+builder.Services.AddScoped(typeof(CMSContentLeadershipService));
+builder.Services.AddScoped(typeof(CMSContentPageItemService));
+builder.Services.AddScoped(typeof(CMSContentPageService));
+builder.Services.AddScoped(typeof(CMSContentPageSectionService));
+builder.Services.AddScoped(typeof(CMSContentRolesService));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -59,7 +85,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthorization();
 app.UseCors(MyAllowSpecificOrigins);
 app.MapControllers();
